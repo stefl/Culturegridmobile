@@ -54,7 +54,33 @@ Doc = (function() {
   Doc.prototype.getThumbnail = function() {
     if (this.get('cached_thumbnail')) {
       return "http://www.culturegrid.org.uk/" + this.get('cached_thumbnail');
+    } else {
+      return null;
     }
+  };
+  Doc.prototype.getContributors = function() {
+    return this.get('dc.contributor');
+  };
+  Doc.prototype.getRightsHolder = function() {
+    return this.get('dcterms.rightsHolder');
+  };
+  Doc.prototype.getIdentifierUrl = function() {
+    return this.get('dc.identifier');
+  };
+  Doc.prototype.getDescription = function() {
+    return this.get('dc.description');
+  };
+  Doc.prototype.getRelatedLink = function() {
+    return this.get('dc.related.link');
+  };
+  Doc.prototype.getLicense = function() {
+    return this.get('dcterms.license');
+  };
+  Doc.prototype.getLocation = function() {
+    return this.get('dc.location');
+  };
+  Doc.prototype.getPartOf = function() {
+    return this.get('dcterms.isPartOf_Name');
   };
   return Doc;
 })();
@@ -64,12 +90,12 @@ DocCollection = (function() {
   }
   __extends(DocCollection, Backbone.Collection);
   DocCollection.prototype.model = Doc;
-  DocCollection.prototype.url = "http://culturegrid.heroku.com/search?q=happy&page=1&per_page=10";
+  DocCollection.prototype.url = "/search?q=happy&page=1&per_page=10";
   DocCollection.prototype.query = "";
   DocCollection.prototype.getByTerm = function(query) {
     var d;
     d = new DocCollection();
-    d.url = "http://culturegrid.heroku.com/search?q=" + query + "&page=1&per_page=10";
+    d.url = "/search?q=" + query + "&page=1&per_page=10";
     d.query = query;
     return d;
   };
@@ -111,7 +137,7 @@ IndexDocView = (function() {
   function IndexDocView() {
     this.render = __bind(this.render, this);;    IndexDocView.__super__.constructor.apply(this, arguments);
     this.el = app.activePage();
-    this.template = _.template('<div>\n  \n  <form action="#docs" method="post" id="search">\n\n      <label>Find something:</label>\n      <input type="text" value="<%= query %>" name="q" id="q" />\n      <button type="submit" data-role="button">Search</button>\n                \n  </form>\n\n <ul data-role="listview" data-inset="true">\n    <% docs.each(function(doc){ %>\n    <li><a href="#docs-<%= doc.cid %>"><%= doc.getTitle() %></a>\n    <% if(doc.getThumbnail() != "") { %>\n    <img src="<%= doc.getThumbnail() %>" />\n    <% } %>\n    </li>\n    <% }); %>\n </ul>\n\n</div>');
+    this.template = _.template('<div>\n  \n  <form action="#docs" method="post" id="search">\n\n      <label>Find something:</label>\n      <input type="text" value="<%= query %>" name="q" id="q" />\n      <button type="submit" data-role="button">Search</button>\n                \n  </form>\n\n <ul data-role="listview" data-inset="true">\n    <% docs.each(function(doc){ %>\n    <li><a href="#docs-<%= doc.cid %>"><%= doc.getTitle() %></a>\n    <% if(doc.getThumbnail() != null) { %>\n    <img src="<%= doc.getThumbnail() %>" />\n    <% } %>\n    </li>\n    <% }); %>\n </ul>\n\n</div>');
     app.Docs.bind('add', this.render);
     app.Docs.fetch({
       success: this.render
@@ -148,7 +174,7 @@ ShowDocView = (function() {
   function ShowDocView() {
     this.render = __bind(this.render, this);;    ShowDocView.__super__.constructor.apply(this, arguments);
     this.el = app.activePage();
-    this.template = _.template('<div>\n  \n  <p>\n    <img style="width: 100%" src="<%= doc.getThumbnail() %>" />\n  </p>\n \n</div>');
+    this.template = _.template('<div>\n  \n  <% if(doc.getThumbnail()) { %>\n    <img style="float:left; margin-right: 1em; margin-bottom: 1em;" src="<%= doc.getThumbnail() %>" />\n  <% } %>\n  \n  <p>\n    <%= doc.getDescription() %>\n  </p>\n  \n  <ul data-role="listview" data-theme="d" data-inset="true" style="clear: both;">\n  <% if(doc.getPartOf()) { %>\n      <li data-role="list-divider">Part of</li>\n    				<% _.each(doc.getPartOf(), function(part){ %>\n      <li><%= part %></li>\n      <% }); %>\n <% } %>\n   \n  \n  <% if(doc.getContributors()) { %>\n      <li data-role="list-divider">Contributors</li>\n    				<% _.each(doc.getContributors(), function(contributor){ %>\n      <li><%= contributor %></li>\n      <% }); %>\n  \n <% } %>\n \n <% if(doc.getLocation()) { %>\n      <li data-role="list-divider">Location</li>\n      <li><%= doc.getLocation() %></li>\n <% } %>\n \n <% if(doc.getRightsHolder()) { %>\n     <li data-role="list-divider">Rights holder</li>\n     <li><%= doc.getRightsHolder() %></li>\n<% } %>\n\n <% if(doc.getRelatedLink()) { %>\n     <li data-role="list-divider">Related Link</li>\n     <li><a href="<%= doc.getRelatedLink() %>">Visit</a></li>\n<% } %>\n </ul>\n</div>');
     this.model.bind('change', this.render);
     this.render();
   }

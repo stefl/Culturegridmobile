@@ -18,7 +18,7 @@ class IndexDocView extends Backbone.View
        <ul data-role="listview" data-inset="true">
           <% docs.each(function(doc){ %>
           <li><a href="#docs-<%= doc.cid %>"><%= doc.getTitle() %></a>
-          <% if(doc.getThumbnail() != "") { %>
+          <% if(doc.getThumbnail() != null) { %>
           <img src="<%= doc.getThumbnail() %>" />
           <% } %>
           </li>

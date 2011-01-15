@@ -9,10 +9,46 @@ class ShowDocView extends Backbone.View
     @template = _.template('''
       <div>
         
+        <% if(doc.getThumbnail()) { %>
+          <img style="float:left; margin-right: 1em; margin-bottom: 1em;" src="<%= doc.getThumbnail() %>" />
+        <% } %>
+        
         <p>
-          <img style="width: 100%" src="<%= doc.getThumbnail() %>" />
+          <%= doc.getDescription() %>
         </p>
+        
+        <ul data-role="listview" data-theme="d" data-inset="true" style="clear: both;">
+        <% if(doc.getPartOf()) { %>
+            <li data-role="list-divider">Part of</li>
+    				<% _.each(doc.getPartOf(), function(part){ %>
+            <li><%= part %></li>
+            <% }); %>
+       <% } %>
+         
+        
+        <% if(doc.getContributors()) { %>
+            <li data-role="list-divider">Contributors</li>
+    				<% _.each(doc.getContributors(), function(contributor){ %>
+            <li><%= contributor %></li>
+            <% }); %>
+        
+       <% } %>
        
+       <% if(doc.getLocation()) { %>
+            <li data-role="list-divider">Location</li>
+            <li><%= doc.getLocation() %></li>
+       <% } %>
+       
+       <% if(doc.getRightsHolder()) { %>
+           <li data-role="list-divider">Rights holder</li>
+           <li><%= doc.getRightsHolder() %></li>
+      <% } %>
+      
+       <% if(doc.getRelatedLink()) { %>
+           <li data-role="list-divider">Related Link</li>
+           <li><a href="<%= doc.getRelatedLink() %>">Visit</a></li>
+      <% } %>
+       </ul>
       </div>
     ''')
     
