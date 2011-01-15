@@ -6,7 +6,7 @@ require "sinatra/jsonp"
 require "json"
 require "culturegrid"
 
-set :public, File.dirname(__FILE__) + '/public'
+set :public, File.dirname(__FILE__)
 
 get '/' do
   send_file 'index.html'
