@@ -187,7 +187,7 @@ ShowDocView = (function() {
   };
   return ShowDocView;
 })();
-app.Docs = new DocCollection().getByTerm("soon");
+app.Docs = new DocCollection().getByTerm("culture");
 app.docController = new DocController();
 $(document).ready(function() {
   Backbone.history.start();
