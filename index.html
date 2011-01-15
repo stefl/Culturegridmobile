@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Culture Grid</title>
+  <meta name="viewport" content="width=default-width; user-scalable=no" />
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+  
+  <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta names="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+	<script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/underscore.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/backbone.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/hacks.js"></script>
+	
+	<link rel="stylesheet" href="jquery-mobile.css" />
+
+  <style type="text/css">	
+		.nav .ui-btn .ui-btn-inner { padding-top: 40px !important; }
+		.nav .ui-btn .icon { width: 30px!important; height: 30px!important; margin-left: -15px !important; box-shadow: none!important; -moz-box-shadow: none!important; -webkit-box-shadow: none!important; -webkit-border-radius: none !important; border-radius: none !important; }
+		.settings .icon { background:  url(icons/20-gear2.png) 50% 50% no-repeat;  background-size: 22px 24px; filter: invert; width: 24px; height: 24px; display: block; margin: auto;}
+		.events .icon { background:  url(icons/83-calendar.png) 50% 50% no-repeat;  background-size: 22px 24px; filter: invert; width: 24px; height: 24px; display: block; margin: auto;}
+		.people .icon { background:  url(icons/145-persondot.png) 50% 50% no-repeat;  background-size: 22px 24px; filter: invert; width: 24px; height: 24px; display: block; margin: auto;}
+		.dashboard .icon { background:  url(icons/152-rolodex.png) 50% 50% no-repeat;  background-size: 22px 24px; filter: invert; width: 24px; height: 24px; display: block; margin: auto;}
+		#nav { position: fixed; top: 0px; width: 100%; z-index: 5000; height: 24px;}
+		#nav ul li { width: 33.33%; display: inline-block;}
+		#nav ul li a { color: white; text-decoration: none; height: 24px; padding: 8px;}
+		#nav ul { width: 100%; padding: 0; margin 0;}
+		.tags {display :none;}
+		.notes {display :none;}
+		
+		#nav ul li a.on.ui-btn {background: #87af45 !important;}
+		#search {
+		  width: 100%;
+		}
+	</style>
+
+  <script type="text/javascript" charset="utf-8">
+  
+	  document.write("<script type='text/javascript' charset='utf-8' src='js/jquery-mobile.js?" + Math.random() + "'></" + "script>");
+    document.write("<script type='text/javascript' charset='utf-8' src='js/concatenation.js?" + Math.random() + "'></" + "script>");
+
+  	function onBodyLoad(){
+  		document.addEventListener("deviceready",onDeviceReady,false);
+  		
+  		// Call jquery.ready() for symbian devices that don't seem to trigger it
+  		jQuery.ready();
+  	}
+	
+  	function onDeviceReady(){
+  	}
+  </script>
+
+	<!--script type="text/javascript" charset="utf-8" src="application.js"></script-->
+
+</head>
+  <body onload="onBodyLoad()">
+    
+    <div data-role="page" id="docs">
+
+      <div data-role="header"> 
+      	<h1>Culture Grid</h1> 
+      </div> 
+
+      <div data-role="content" class="body">	
+      </div>
+
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,2 @@
+#! /usr/bin/ruby
+puts `coffee -b -o js/ --join --compile lib/application/helpers.coffee lib/models/*.coffee lib/collections/*.coffee lib/controllers/*.coffee lib/views/*.coffee lib/application/app.coffee`
