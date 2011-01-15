@@ -1,1 +1,5 @@
+culturegrid --version '>= 0.1.2'
 sinatra
+haml
+sinatra-jsonp
+json
