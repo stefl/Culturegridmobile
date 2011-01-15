@@ -90,12 +90,12 @@ DocCollection = (function() {
   }
   __extends(DocCollection, Backbone.Collection);
   DocCollection.prototype.model = Doc;
-  DocCollection.prototype.url = "/search?q=happy&page=1&per_page=10";
+  DocCollection.prototype.url = "/search?q=happy&page=1&per_page=50";
   DocCollection.prototype.query = "";
   DocCollection.prototype.getByTerm = function(query) {
     var d;
     d = new DocCollection();
-    d.url = "/search?q=" + query + "&page=1&per_page=10";
+    d.url = "/search?q=" + query + "&page=1&per_page=50";
     d.query = query;
     return d;
   };
