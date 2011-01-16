@@ -177,7 +177,7 @@ ShowDocView = (function() {
   function ShowDocView() {
     this.render = __bind(this.render, this);;    ShowDocView.__super__.constructor.apply(this, arguments);
     this.el = app.activePage();
-    this.template = _.template('<div>\n  \n  <% if(doc.getThumbnail()) { %>\n    <img src="<%= doc.getLargeImage() %>" />\n  <% } %>\n  \n  <p>\n    <%= doc.getDescription() %>\n  </p>\n  \n  <ul data-role="listview" data-theme="d" data-inset="true" style="clear: both;">\n  <% if(doc.getPartOf()) { %>\n      <li data-role="list-divider">Part of</li>\n    				<% _.each(doc.getPartOf(), function(part){ %>\n      <li><%= part %></li>\n      <% }); %>\n <% } %>\n   \n  \n  <% if(doc.getContributors()) { %>\n      <li data-role="list-divider">Contributors</li>\n    				<% _.each(doc.getContributors(), function(contributor){ %>\n      <li><%= contributor %></li>\n      <% }); %>\n  \n <% } %>\n \n <% if(doc.getLocation()) { %>\n      <li data-role="list-divider">Location</li>\n      <li><%= doc.getLocation() %></li>\n <% } %>\n \n <% if(doc.getRightsHolder()) { %>\n     <li data-role="list-divider">Rights holder</li>\n     <li><%= doc.getRightsHolder() %></li>\n<% } %>\n\n <% if(doc.getRelatedLink()) { %>\n     <li data-role="list-divider">Related Link</li>\n     <li><a href="<%= doc.getRelatedLink() %>">Visit</a></li>\n<% } %>\n </ul>\n</div>');
+    this.template = _.template('<div>\n  \n  <% if(doc.getThumbnail()) { %>\n    <img style="width: 100%" src="<%= doc.getLargeImage() %>" />\n  <% } %>\n  \n  <p>\n    <%= doc.getDescription() %>\n  </p>\n  \n  <ul data-role="listview" data-theme="d" data-inset="true" style="clear: both;">\n  <% if(doc.getPartOf()) { %>\n      <li data-role="list-divider">Part of</li>\n    				<% _.each(doc.getPartOf(), function(part){ %>\n      <li><%= part %></li>\n      <% }); %>\n <% } %>\n   \n  \n  <% if(doc.getContributors()) { %>\n      <li data-role="list-divider">Contributors</li>\n    				<% _.each(doc.getContributors(), function(contributor){ %>\n      <li><%= contributor %></li>\n      <% }); %>\n  \n <% } %>\n \n <% if(doc.getLocation()) { %>\n      <li data-role="list-divider">Location</li>\n      <li><%= doc.getLocation() %></li>\n <% } %>\n \n <% if(doc.getRightsHolder()) { %>\n     <li data-role="list-divider">Rights holder</li>\n     <li><%= doc.getRightsHolder() %></li>\n<% } %>\n\n <% if(doc.getRelatedLink()) { %>\n     <li data-role="list-divider">Related Link</li>\n     <li><a href="<%= doc.getRelatedLink() %>">Visit</a></li>\n<% } %>\n </ul>\n</div>');
     this.model.bind('change', this.render);
     this.render();
   }
@@ -190,7 +190,7 @@ ShowDocView = (function() {
   };
   return ShowDocView;
 })();
-app.Docs = new DocCollection().getByTerm("culture");
+app.Docs = new DocCollection().getByTerm("painting");
 app.docController = new DocController();
 $(document).ready(function() {
   Backbone.history.start();

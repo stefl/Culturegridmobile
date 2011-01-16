@@ -1,4 +1,4 @@
-app.Docs = new DocCollection().getByTerm("culture")
+app.Docs = new DocCollection().getByTerm("painting")
 app.docController = new DocController()
 
 $(document).ready ->
