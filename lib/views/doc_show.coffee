@@ -10,7 +10,7 @@ class ShowDocView extends Backbone.View
       <div>
         
         <% if(doc.getThumbnail()) { %>
-          <img src="<%= doc.getLargeImage() %>" />
+          <img style="width: 100%" src="<%= doc.getLargeImage() %>" />
         <% } %>
         
         <p>
