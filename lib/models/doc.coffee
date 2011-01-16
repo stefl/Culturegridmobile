@@ -42,3 +42,6 @@ class Doc extends Backbone.Model
   getPartOf: ->
     @get('dcterms.isPartOf_Name')
     
+  getLargeImage: ->
+    "http://culturescraper.heroku.com/show?url=" + escape(@get('dc.related.link'))
+    

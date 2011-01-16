@@ -82,6 +82,9 @@ Doc = (function() {
   Doc.prototype.getPartOf = function() {
     return this.get('dcterms.isPartOf_Name');
   };
+  Doc.prototype.getLargeImage = function() {
+    return "http://culturescraper.heroku.com/show?url=" + escape(this.get('dc.related.link'));
+  };
   return Doc;
 })();
 DocCollection = (function() {
@@ -174,7 +177,7 @@ ShowDocView = (function() {
   function ShowDocView() {
     this.render = __bind(this.render, this);;    ShowDocView.__super__.constructor.apply(this, arguments);
     this.el = app.activePage();
-    this.template = _.template('<div>\n  \n  <% if(doc.getThumbnail()) { %>\n    <img style="float:left; margin-right: 1em; margin-bottom: 1em;" src="<%= doc.getThumbnail() %>" />\n  <% } %>\n  \n  <p>\n    <%= doc.getDescription() %>\n  </p>\n  \n  <ul data-role="listview" data-theme="d" data-inset="true" style="clear: both;">\n  <% if(doc.getPartOf()) { %>\n      <li data-role="list-divider">Part of</li>\n    				<% _.each(doc.getPartOf(), function(part){ %>\n      <li><%= part %></li>\n      <% }); %>\n <% } %>\n   \n  \n  <% if(doc.getContributors()) { %>\n      <li data-role="list-divider">Contributors</li>\n    				<% _.each(doc.getContributors(), function(contributor){ %>\n      <li><%= contributor %></li>\n      <% }); %>\n  \n <% } %>\n \n <% if(doc.getLocation()) { %>\n      <li data-role="list-divider">Location</li>\n      <li><%= doc.getLocation() %></li>\n <% } %>\n \n <% if(doc.getRightsHolder()) { %>\n     <li data-role="list-divider">Rights holder</li>\n     <li><%= doc.getRightsHolder() %></li>\n<% } %>\n\n <% if(doc.getRelatedLink()) { %>\n     <li data-role="list-divider">Related Link</li>\n     <li><a href="<%= doc.getRelatedLink() %>">Visit</a></li>\n<% } %>\n </ul>\n</div>');
+    this.template = _.template('<div>\n  \n  <% if(doc.getThumbnail()) { %>\n    <img src="<%= doc.getLargeImage() %>" />\n  <% } %>\n  \n  <p>\n    <%= doc.getDescription() %>\n  </p>\n  \n  <ul data-role="listview" data-theme="d" data-inset="true" style="clear: both;">\n  <% if(doc.getPartOf()) { %>\n      <li data-role="list-divider">Part of</li>\n    				<% _.each(doc.getPartOf(), function(part){ %>\n      <li><%= part %></li>\n      <% }); %>\n <% } %>\n   \n  \n  <% if(doc.getContributors()) { %>\n      <li data-role="list-divider">Contributors</li>\n    				<% _.each(doc.getContributors(), function(contributor){ %>\n      <li><%= contributor %></li>\n      <% }); %>\n  \n <% } %>\n \n <% if(doc.getLocation()) { %>\n      <li data-role="list-divider">Location</li>\n      <li><%= doc.getLocation() %></li>\n <% } %>\n \n <% if(doc.getRightsHolder()) { %>\n     <li data-role="list-divider">Rights holder</li>\n     <li><%= doc.getRightsHolder() %></li>\n<% } %>\n\n <% if(doc.getRelatedLink()) { %>\n     <li data-role="list-divider">Related Link</li>\n     <li><a href="<%= doc.getRelatedLink() %>">Visit</a></li>\n<% } %>\n </ul>\n</div>');
     this.model.bind('change', this.render);
     this.render();
   }
